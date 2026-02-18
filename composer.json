@@ -1,6 +1,6 @@
 {
   "name": "touristesim/touristesim-php-sdk",
-  "description": "Official PHP SDK for Tourist eSIM Partner API - Easy integration for resellers and affiliates",
+  "description": "Official PHP SDK for Tourist eSIM Partner API - Easy integration for resellers and partners",
   "type": "library",
   "license": "MIT",
   "authors": [
