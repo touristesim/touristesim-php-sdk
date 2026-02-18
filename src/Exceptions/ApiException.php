@@ -18,7 +18,7 @@ class ApiException extends Exception
         int $statusCode = 0,
         ?array $response = null,
         ?string $requestId = null,
-        Exception $previous = null
+        ?Exception $previous = null
     ) {
         parent::__construct($message, 0, $previous);
         $this->statusCode = $statusCode;
@@ -82,7 +82,7 @@ class RateLimitException extends ApiException
 {
     private int $retryAfter = 60;
 
-    public function __construct(int $retryAfter = 60, Exception $previous = null)
+    public function __construct(int $retryAfter = 60, ?Exception $previous = null)
     {
         parent::__construct('Rate limit exceeded. Please try again later.', 429, null, null, $previous);
         $this->retryAfter = $retryAfter;
