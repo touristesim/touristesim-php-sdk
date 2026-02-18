@@ -18,6 +18,16 @@ Official PHP SDK for Tourist eSIM Partner API. Enable easy integration for resel
 - cURL extension
 - GuzzleHTTP 7.0+
 
+## Testing
+
+Run the included test script to verify SDK functionality:
+
+```bash
+php test_sdk.php
+```
+
+This runs basic tests for SDK instantiation, resource classes, exception handling, and overall structure without making actual API calls.
+
 ## Installation
 
 Install via Composer:
