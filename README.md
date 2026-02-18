@@ -308,7 +308,8 @@ try {
 ## API Documentation
 
 For complete API documentation, visit:
-- **Production**: https://docs.touristesim.net/api
+- **API Docs**: https://docs.touristesim.net/
+- **SDK Guides**: https://docs.touristesim.net/sdks/guides
 - **Partner Dashboard**: https://partners.touristesim.net
 
 ## Support
