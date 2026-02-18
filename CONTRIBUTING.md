@@ -196,7 +196,7 @@ When reporting issues, please include:
 
 ## Questions?
 
-- Email: developers@touristesim.net
+- Email: tech@touristesim.net
 - GitHub Issues: https://github.com/touristesim/touristesim-php-sdk/issues
 
 ## License

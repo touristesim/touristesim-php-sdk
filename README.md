@@ -314,8 +314,9 @@ For complete API documentation, visit:
 ## Support
 
 For issues or questions:
-- Email: developers@touristesim.net
-- GitHub Issues: https://github.com/touristesim/touristesim-php-sdk/issues
+- **Technical Support**: tech@touristesim.net
+- **GitHub Issues**: https://github.com/touristesim/touristesim-php-sdk/issues
+- **Dashboard**: https://partners.touristesim.net
 
 ## License
 
