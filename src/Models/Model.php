@@ -124,6 +124,7 @@ class Plan extends Model
         'voice_minutes',
         'sms_count',
         'provider',
+        'network',
     ];
 
     protected array $casts = [
@@ -219,6 +220,23 @@ class Plan extends Model
     public function getProvider(): string
     {
         return $this->getAttribute('provider') ?? 'Unknown';
+    }
+
+    public function getNetwork(): ?array
+    {
+        return $this->getAttribute('network');
+    }
+
+    public function getNetworkOperator(): ?string
+    {
+        $network = $this->getNetwork();
+        return $network['operator'] ?? null;
+    }
+
+    public function getNetworkSpeed(): ?string
+    {
+        $network = $this->getNetwork();
+        return $network['speed'] ?? null;
     }
 }
 
