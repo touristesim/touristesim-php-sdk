@@ -385,4 +385,73 @@ class Esim extends Model
     {
         return $this->getAttribute('validity_end');
     }
+
+    public function getCoverage(): ?array
+    {
+        return $this->getAttribute('coverage');
+    }
+
+    public function getCoverageType(): ?string
+    {
+        $coverage = $this->getCoverage();
+        return $coverage['type'] ?? null;
+    }
+
+    public function getCoverageLabel(): ?string
+    {
+        $coverage = $this->getCoverage();
+        return $coverage['label'] ?? null;
+    }
+
+    public function getCoverageCountries(): array
+    {
+        $coverage = $this->getCoverage();
+        return $coverage['countries'] ?? [];
+    }
+
+    public function getCoverageRegion(): ?array
+    {
+        $coverage = $this->getCoverage();
+        return $coverage['region'] ?? null;
+    }
+
+    public function getNetworkOperators(): ?array
+    {
+        return $this->getAttribute('network_operators');
+    }
+
+    public function getNetworkOperatorsCount(): int
+    {
+        $operators = $this->getNetworkOperators();
+        return $operators['count'] ?? 0;
+    }
+
+    public function getNetworkOperatorNames(): array
+    {
+        $operators = $this->getNetworkOperators();
+        return $operators['operators'] ?? [];
+    }
+
+    public function getShareLink(): ?array
+    {
+        return $this->getAttribute('share_link');
+    }
+
+    public function getShareLinkSlug(): ?string
+    {
+        $shareLink = $this->getShareLink();
+        return $shareLink['slug'] ?? null;
+    }
+
+    public function getShareLinkUrl(): ?string
+    {
+        $shareLink = $this->getShareLink();
+        return $shareLink['url'] ?? null;
+    }
+
+    public function getShareLinkPin(): ?string
+    {
+        $shareLink = $this->getShareLink();
+        return $shareLink['pin'] ?? null;
+    }
 }
