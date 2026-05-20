@@ -128,26 +128,20 @@ class Plan extends Model
     ];
 
     protected array $casts = [
-        'id' => 'int',
         'price' => 'float',
         'validity_days' => 'int',
         'reloadable' => 'bool',
         'countries_count' => 'int',
     ];
 
-    public function getId(): int
+    public function getPlanSlug(): string
     {
-        return $this->getAttribute('id');
+        return $this->getAttribute('plan_slug') ?? '';
     }
 
     public function getName(): string
     {
         return $this->getAttribute('name') ?? '';
-    }
-
-    public function getSlug(): string
-    {
-        return $this->getAttribute('slug') ?? '';
     }
 
     public function getType(): string
@@ -284,26 +278,34 @@ class Country extends Model
 class Order extends Model
 {
     protected array $fillable = [
-        'id',
-        'plan_id',
-        'quantity',
+        'order_number',
         'status',
-        'total_price',
+        'amount',
         'currency',
+        'items_count',
+        'reference',
+        'is_sandbox',
+        'customer',
+        'items',
+        'esims',
         'created_at',
         'updated_at',
     ];
 
     protected array $casts = [
-        'id' => 'int',
-        'plan_id' => 'int',
-        'quantity' => 'int',
-        'total_price' => 'float',
+        'items_count' => 'int',
+        'amount'      => 'float',
+        'is_sandbox'  => 'bool',
     ];
 
-    public function getId(): int
+    public function getOrderNumber(): string
     {
-        return $this->getAttribute('id');
+        return $this->getAttribute('order_number') ?? '';
+    }
+
+    public function getAmount(): float
+    {
+        return (float) ($this->getAttribute('amount') ?? 0);
     }
 
     public function getStatus(): string
@@ -326,14 +328,10 @@ class Order extends Model
         return $this->getStatus() === 'cancelled';
     }
 
-    public function getTotalPrice(): float
+    public function getItemsCount(): int
     {
-        return (float)$this->getAttribute('total_price');
+        return (int)$this->getAttribute('items_count');
     }
-
-    public function getQuantity(): int
-    {
-        return $this->getAttribute('quantity') ?? 0;
     }
 }
 

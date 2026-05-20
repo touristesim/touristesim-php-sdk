@@ -24,7 +24,7 @@ use TouristeSIM\Sdk\Resources\{
  * $plans = $sdk->plans()->get(['country' => 'AL']);
  * 
  * // Create order
- * $order = $sdk->orders()->create(['plan_id' => 123, 'quantity' => 5]);
+ * $order = $sdk->orders()->create(['plans' => [['plan_slug' => 'vietnam_100mb_7days_7e87c5', 'quantity' => 1]]]);
  * 
  * // Check balance
  * $balance = $sdk->balance()->get();

@@ -10,8 +10,8 @@ use TouristeSIM\Sdk\Support\Collection;
  * 
  * Usage:
  * $plans = $sdk->plans()->get(['country' => 'AL', 'per_page' => 10]);
- * $plan = $sdk->plans()->find(123);
- * $valid = $sdk->plans()->validate(['plan_id' => 123, 'quantity' => 5]);
+ * $plan = $sdk->plans()->find('vietnam_100mb_7days_7e87c5');
+ * $valid = $sdk->plans()->validate('vietnam_100mb_7days_7e87c5', 5);
  */
 class Plans extends Resource
 {
@@ -47,29 +47,29 @@ class Plans extends Resource
     }
 
     /**
-     * Get single plan by ID
-     * 
-     * @param int $id Plan ID
+     * Get single plan by slug
+     *
+     * @param string $slug Plan slug (e.g., 'vietnam_100mb_7days_7e87c5')
      * @return Plan
      */
-    public function find(int $id): Plan
+    public function find(string $slug): Plan
     {
-        $response = $this->client->get("/plans/{$id}");
+        $response = $this->client->get("/plans/{$slug}");
         return new Plan($response['data']);
     }
 
     /**
      * Validate plan availability and get pricing
-     * 
-     * @param int $planId Plan ID
+     *
+     * @param string $planSlug Plan slug (e.g., 'vietnam_100mb_7days_7e87c5')
      * @param int $quantity Quantity to purchase
      * @return array Validation result with pricing info
      */
-    public function validate(int $planId, int $quantity = 1): array
+    public function validate(string $planSlug, int $quantity = 1): array
     {
         return $this->client->post('/plans/validate', [
-            'plan_id' => $planId,
-            'quantity' => $quantity,
+            'plan_slug' => $planSlug,
+            'quantity'  => $quantity,
         ])['data'];
     }
 

@@ -43,8 +43,7 @@ echo "\n";
 echo "2. Handling Validation Errors:\n";
 try {
     $order = $sdk->orders()->create([
-        'plan_id' => -1, // Invalid plan ID
-        'quantity' => 'invalid', // Should be integer
+        'plans' => [['plan_slug' => '', 'quantity' => 'invalid']], // Invalid data
     ]);
 } catch (ValidationException $e) {
     echo "   ✗ Validation Error: " . $e->getMessage() . "\n";
@@ -61,7 +60,7 @@ echo "\n";
 // Example 3: Handle not found errors
 echo "3. Handling Resource Not Found Errors:\n";
 try {
-    $plan = $sdk->plans()->find(999999);
+    $plan = $sdk->plans()->find('nonexistent_plan_slug');
 } catch (ResourceNotFoundException $e) {
     echo "   ✗ Resource Not Found: " . $e->getMessage() . "\n";
     echo "   Status Code: " . $e->getStatusCode() . " (404)\n";
@@ -133,7 +132,7 @@ echo "\n";
 // Example 7: Generic error handling for all exceptions
 echo "7. Generic Error Handling:\n";
 try {
-    $plan = $sdk->plans()->find(1);
+    $plan = $sdk->plans()->find('vietnam_100mb_7days_7e87c5');
 } catch (ApiException $e) {
     echo "   ✗ API Error\n";
     echo "   Message: " . $e->getMessage() . "\n";
@@ -225,5 +224,5 @@ try {
     throw new ValidationException("Invalid plan data", 422);
 } catch (\Exception $e) {
     echo "   Logging error:\n";
-    logError($e, ['action' => 'create_order', 'plan_id' => 123]);
+    logError($e, ['action' => 'create_order', 'plan_slug' => 'vietnam_100mb_7days_7e87c5']);
 }

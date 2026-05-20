@@ -10,8 +10,8 @@ use TouristeSIM\Sdk\Support\{Collection, PaginatedCollection};
  * 
  * Usage:
  * $orders = $sdk->orders()->all();
- * $order = $sdk->orders()->create(['plan_id' => 123, 'quantity' => 5]);
- * $order = $sdk->orders()->find(456);
+ * $order = $sdk->orders()->create(['plans' => [['plan_slug' => 'vietnam_100mb_7days_7e87c5', 'quantity' => 1]]]);
+ * $order = $sdk->orders()->find('PO-260519MKAUVE');
  */
 class Orders extends Resource
 {
@@ -28,29 +28,24 @@ class Orders extends Resource
     }
 
     /**
-     * Get order by ID
+     * Get order by order number
+     *
+     * @param string $orderNumber e.g. 'PO-260519MKAUVE'
      */
-    public function find(int $id): Order
+    public function find(string $orderNumber): Order
     {
-        $response = $this->client->get("/orders/{$id}");
+        $response = $this->client->get("/orders/{$orderNumber}");
         return new Order($response['data']);
     }
 
     /**
      * Create new order
+     *
+     * @param array $data ['plans' => [['plan_slug' => '...', 'quantity' => 1]], 'customer' => [...]]
      */
     public function create(array $data): Order
     {
         $response = $this->client->post('/orders', $data);
         return new Order($response['data']);
-    }
-
-    /**
-     * Cancel order
-     */
-    public function cancel(int $id): bool
-    {
-        $this->client->post("/orders/{$id}/cancel");
-        return true;
     }
 }

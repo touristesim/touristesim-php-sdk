@@ -65,13 +65,13 @@ foreach ($globalPlans as $plan) {
 // Example 5: Get a specific plan
 echo "\n5. Get specific plan (if ID exists):\n";
 try {
-    $plan = $sdk->plans()->find(1);
-    printf("   Plan ID: %d\n", $plan['id']);
+    $plan = $sdk->plans()->find('vietnam_100mb_7days_7e87c5');
+    printf("   Slug: %s\n", $plan['plan_slug']);
     printf("   Name: %s\n", $plan['name']);
-    printf("   Price: %s %s\n", $plan['price'], $plan['currency']);
-    printf("   Data: %d MB\n", $plan['data']);
-    printf("   Validity: %d days\n", $plan['validity_days']);
-    printf("   Type: %s\n", $plan['type']);
+    printf("   Price: %s %s\n", $plan['price'], $plan['currency'] ?? 'USD');
+    printf("   Data: %s\n", $plan['data_display'] ?? '');
+    printf("   Validity: %d days\n", $plan['validity_days'] ?? 0);
+    printf("   Type: %s\n", $plan['type'] ?? '');
 } catch (\Exception $e) {
     echo "   Plan not found or error: " . $e->getMessage() . "\n";
 }
@@ -79,9 +79,9 @@ try {
 // Example 6: Validate plan before purchase
 echo "\n6. Validate plan before purchase:\n";
 try {
-    $validation = $sdk->plans()->validate(planId: 1, quantity: 5);
-    printf("   Plan valid: %s\n", $validation['is_valid'] ? 'Yes' : 'No');
-    printf("   Total price: %s\n", $validation['total_price']);
+    $validation = $sdk->plans()->validate('vietnam_100mb_7days_7e87c5', 5);
+    printf("   Valid: %s\n", $validation['valid'] ? 'Yes' : 'No');
+    printf("   Total: %s\n", $validation['pricing']['total'] ?? '');
     printf("   Currency: %s\n", $validation['currency']);
 } catch (\Exception $e) {
     echo "   Validation error: " . $e->getMessage() . "\n";

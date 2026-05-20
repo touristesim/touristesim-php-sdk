@@ -65,16 +65,17 @@ class ModelsTest extends TestCase
     public function test_order_model_helpers()
     {
         $data = [
-            'id' => 1,
-            'status' => 'completed',
-            'plan_id' => 123,
-            'quantity' => '5',
-            'total_price' => '199.95',
-            'currency' => 'USD',
+            'order_number' => 'PO-260519MKAUVE',
+            'status'       => 'completed',
+            'amount'       => '12.50',
+            'currency'     => 'USD',
+            'items_count'  => 1,
         ];
-        
+
         $order = new Order($data);
-        
+
+        $this->assertEquals('PO-260519MKAUVE', $order->getOrderNumber());
+        $this->assertEquals(12.50, $order->getAmount());
         $this->assertEquals('completed', $order->getStatus());
         $this->assertTrue($order->isCompleted());
         $this->assertFalse($order->isPending());

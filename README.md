@@ -92,7 +92,7 @@ $plans = $sdk->plans()->get([
 ]);
 
 // Get single plan
-$plan = $sdk->plans()->find(123);
+$plan = $sdk->plans()->find('vietnam_100mb_7days_7e87c5');
 
 // Get plans by country
 $usPlans = $sdk->plans()->byCountry('US');
@@ -138,20 +138,19 @@ $regions = $sdk->regions()->all();
 ```php
 // Create order
 $order = $sdk->orders()->create([
-    'plan_id' => 123,
-    'quantity' => 2,
-    'customer_email' => 'customer@example.com',
-    'coupon_code' => 'SAVE10' // optional
+    'plans' => [
+        ['plan_slug' => 'vietnam_100mb_7days_7e87c5', 'quantity' => 1],
+    ],
+    'customer' => ['email' => 'customer@example.com', 'name' => 'Jane Doe'],
 ]);
 
 // Get all orders
 $orders = $sdk->orders()->all(['status' => 'completed']);
 
-// Get single order
-$order = $sdk->orders()->find(456);
+// Get single order by order number
+$order = $sdk->orders()->find('PO-260519MKAUVE');
 
-// Cancel order
-$cancelled = $sdk->orders()->cancel(456);
+// To request a cancellation or refund, contact Tourist eSIM support
 ```
 
 ### eSIMs
@@ -232,7 +231,7 @@ use TouristeSIM\Sdk\Exceptions\{
 };
 
 try {
-    $plan = $sdk->plans()->find(999);
+    $plan = $sdk->plans()->find('nonexistent_plan_slug');
 } catch (ResourceNotFoundException $e) {
     echo "Plan not found: " . $e->getMessage();
 } catch (AuthenticationException $e) {
